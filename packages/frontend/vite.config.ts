@@ -1,6 +1,10 @@
 import {defineConfig} from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'node:path'
+import {FLOCI_REST_API_ORIGIN} from './deploy-defaults'
+
+/** Bun `packages/api` — NOT the Floci S3-compatible host (`deploy-defaults.ts` comment). */
+const API_PROXY_TARGET = FLOCI_REST_API_ORIGIN
 
 export default defineConfig({
     plugins: [react()],
@@ -23,7 +27,7 @@ export default defineConfig({
         host: '0.0.0.0',
         proxy: {
             '/api': {
-                target: process.env.API_TARGET ?? 'http://localhost:3001',
+                target: API_PROXY_TARGET,
                 changeOrigin: true,
             },
         },

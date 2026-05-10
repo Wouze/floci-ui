@@ -1,8 +1,7 @@
 import {Hono} from 'hono'
+import {FLOCI_ENDPOINT} from '../config'
 
 const app = new Hono()
-
-const FLOCI_ENDPOINT = process.env.FLOCI_ENDPOINT || 'http://localhost:4566'
 
 app.get('/', async (c) => {
     try {

@@ -9,6 +9,7 @@ import sns from './routes/sns'
 import lambda from './routes/lambda'
 import dynamodb from './routes/dynamodb'
 import cloudwatch from './routes/cloudwatch'
+import {PORT} from './config'
 
 const app = new Hono()
 
@@ -27,7 +28,7 @@ app.route('/api/cloudwatch', cloudwatch)
 app.use('*', serveStatic({root: './public'}))
 app.get('*', serveStatic({path: './public/index.html'}))
 
-const port = Number(process.env.PORT ?? 3001)
+const port = PORT
 console.log(`floci-api listening on :${port}`)
 
 export default {port, fetch: app.fetch}

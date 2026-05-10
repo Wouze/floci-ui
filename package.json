@@ -5,9 +5,12 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace=packages/frontend",
-    "build": "npm run build --workspace=packages/frontend",
-    "dev:api": "cd packages/api && ~/.bun/bin/bun run --watch src/index.ts",
-    "start:api": "cd packages/api && ~/.bun/bin/bun run src/index.ts"
+    "dev": "concurrently -n web,api -c cyan,magenta \"npm run dev --workspace=@floci/frontend\" \"npm run dev --workspace=@floci/api\"",
+    "build": "npm run build --workspace=@floci/frontend",
+    "dev:api": "npm run dev --workspace=@floci/api",
+    "start:api": "npm run start --workspace=@floci/api"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }
